@@ -10,6 +10,7 @@ spec:
   #- hosts:
   #  - echo.foo.c01.k8s-workshop.dev
   #  secretName: echo-namespace-cert
+  ingressClassName: nginx
   rules:
   - host: echo.foo.c01.k8s-workshop.dev
     http:
