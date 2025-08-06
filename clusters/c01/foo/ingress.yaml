@@ -3,7 +3,12 @@ kind: Ingress
 metadata:
   name: echo-namespace
   namespace: foo
+  cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
+  tls:
+  - hosts:
+    - echo.foo.c01.k8s-workshop.dev
+    secretName: echo-namespace-cert
   rules:
   - host: echo.foo.c01.k8s-workshop.dev
     http:
