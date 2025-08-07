@@ -4,7 +4,7 @@ metadata:
   name: flux-webhook
   namespace: flux-system
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-production
+    cert-manager.io/cluster-issuer: letsencrypt-staging
 spec:
   tls:
   - hosts:
