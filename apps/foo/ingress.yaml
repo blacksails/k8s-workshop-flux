@@ -3,13 +3,13 @@ kind: Ingress
 metadata:
   name: echo-namespace
   namespace: foo
-  #annotations:
-  # cert-manager.io/cluster-issuer: letsencrypt-staging
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
 spec:
-  #tls:
-  #- hosts:
-  #  - echo.foo.c01.k8s-workshop.dev
-  #  secretName: echo-namespace-cert
+  tls:
+  - hosts:
+    - echo.foo.c01.k8s-workshop.dev
+    secretName: echo-namespace-cert
   ingressClassName: nginx
   rules:
   - host: echo.foo.c01.k8s-workshop.dev
