@@ -1,0 +1,40 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: flux-webhook
+  namespace: flux-system
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+spec:
+  tls:
+  - hosts:
+    - flux.c01.k8s-workshop.dev
+    secretName: flux-webhook-tls
+  ingressClassName: nginx
+  rules:
+  - host: flux.c01.k8s-workshop.dev
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: webhook-receiver
+            port:
+              number: 80
+---
+apiVersion: notification.toolkit.fluxcd.io/v1
+kind: Receiver
+metadata:
+  name: github
+  namespace: flux-system
+spec:
+  type: github
+  events:
+    - "ping"
+    - "push"
+  secretRef:
+    name: webhook-token
+  resources:
+    - kind: GitRepository
+      name: flux-system
